@@ -37,14 +37,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/devextreme/dist/css/dx.light.css",
               "src/styles.scss"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "prerender": false,
+            "ssr": false
           },
           "configurations": {
             "production": {
@@ -109,5 +108,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "725e2355-92df-4bf0-9fa3-123ac35a6108"
   }
 }
