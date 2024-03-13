@@ -1,6 +1,10 @@
 .outer {
     height: 100vh;
-    background: linear-gradient(to top, white 5%,  orange 90%), no-repeat;
+    background-color: orange ;
+    background-image: url("https://companieslogo.com/img/orig/VAKBN.IS-68aa6daf.png?t=1602914510") ;
+    background-repeat: no-repeat;
+    background-size: 15% 15%;
+    background-position:  top 3% center;
 }
 
 

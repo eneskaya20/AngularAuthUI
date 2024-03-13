@@ -8,8 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 export class UserStoreService {
   private fullName$ = new BehaviorSubject<string>("");
   private role$ = new BehaviorSubject<string>("");
+  private department$ = new BehaviorSubject<string>("");
   constructor() { }
 
+  public getDepartmentFromStore(){
+    return this.department$.asObservable();
+  }
+  public setDepartmentForStore(department:string){
+    this.department$.next(department);
+  }
   public getRoleFromStore(){
     return this.role$.asObservable();
   }

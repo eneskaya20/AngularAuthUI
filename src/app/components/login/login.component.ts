@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
   }
   onLogin(){
     if(this.loginForm.valid){
-      //send the data to the server
       console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe({
         next:(res) =>{

@@ -15,8 +15,11 @@ export class AuthService {
   }
 
   signUp(userObj: any){
-    return this.http.post<any>(`${this.baseUrl}Register`, userObj)
-  
+    return this.http.post<any>(`${this.baseUrl}signup`, userObj)
+  }
+
+  Register(userObj: any){
+    return this.http.post<any>(`${this.baseUrl}register`, userObj)
   }
 
   login(loginObj: any){
@@ -53,6 +56,11 @@ export class AuthService {
   getRoleFromToken(){
     if(this.userPayload){
       return this.userPayload.role;
+    }
+  }
+  getDepartmentFromToken(){
+    if(this.userPayload){
+      return this.userPayload.department;
     }
   }
 }

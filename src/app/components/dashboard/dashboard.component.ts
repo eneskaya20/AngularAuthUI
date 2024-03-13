@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { ApiService } from '../../services/api.service';
 import { BrowserModule } from '@angular/platform-browser';  
 import { UserStoreService } from '../../services/user-store.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +11,21 @@ import { UserStoreService } from '../../services/user-store.service';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit{
+    addUser() {
+      this.router.navigate(['/user-signup']); 
+      }
+    showUserButton: boolean = true;
+    clickMain() {
+      throw new Error('Method not implemented.');
+    }
+    clickDash() {
+      this.router.navigate(['/signup']); 
+    }
     public users: any = [];  
     public fullName:string = "";
-    constructor(private api: ApiService ,private auth: AuthService,private userStore:UserStoreService){}
+    constructor(private api: ApiService ,private auth: AuthService,private userStore:UserStoreService,private router:Router){}
     public role!:string;
+    public department!:string;
 
     ngOnInit(){
       this.api.getUsers().subscribe(res =>{
@@ -31,7 +43,12 @@ export class DashboardComponent implements OnInit{
         const roleFromToken = this.auth.getRoleFromToken();
         this.role = val || roleFromToken;
       })
-     
+
+      this.userStore.getDepartmentFromStore()
+      .subscribe(val=>{
+        const departFromToken = this.auth.getDepartmentFromToken();
+        this.department = val || departFromToken;
+      })
    
     }
 

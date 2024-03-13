@@ -1,31 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import ValidateForm from '../../helpers/validateform';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  selector: 'app-user-signup',
+  templateUrl: './user-signup.component.html',
+  styleUrl: './user-signup.component.scss'
 })
-export class SignupComponent implements OnInit{
+export class UserSignupComponent implements OnInit {
   ngOnInit(): void {
-    this.signupForm = this.fb.group({
+    this.userSignupForm = this.fb.group({
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
       userName: ['',Validators.required],
+      role: ['',Validators.required],
+      department: ['',Validators.required],
       email: ['',Validators.required],
       password: ['',Validators.required]
 
     })
   }
+
   type:string = 'password';
   isText:boolean = false;
   eyeIcon: string = "fa-eye-slash";
-  signupForm!: FormGroup;
+  userSignupForm!: FormGroup;
   constructor (private fb:FormBuilder, private auth:AuthService,private router:Router) {}
-
 
   hideShowPass(){
     this.isText = !this.isText;
@@ -37,14 +39,16 @@ export class SignupComponent implements OnInit{
       this.eyeIcon = "fa-eye-slash";
     }
   }
+
   onSignup(){
-    if(this.signupForm.valid){
-      console.log(this.signupForm.value);
-      this.auth.signUp(this.signupForm.value)
+    if(this.userSignupForm.valid){
+      
+      console.log(this.userSignupForm.value);
+      this.auth.Register(this.userSignupForm.value)
       .subscribe({
         next:(res) =>{
           alert(res.message);
-          this.signupForm.reset();
+          this.userSignupForm.reset();
           this.router.navigate(['/login']);
         },
         error:(err)=>{
@@ -52,7 +56,7 @@ export class SignupComponent implements OnInit{
         } 
       })
     }else{
-      ValidateForm.validateAllFormFields(this.signupForm);
+      ValidateForm.validateAllFormFields(this.userSignupForm);
       alert('Invalid Form');
     }
   }
